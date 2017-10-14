@@ -21,11 +21,11 @@
 
 using namespace std;
 
-void clr_scrn()
-{
+void clr_scrn() // This simple for-loop is being used to simulate the system ("CLS") command which doesn't work in Xcode.
+    {
     for (int i = 1; i < 11; i++)
         cout << "\n" << endl;
-}
+    }
 
 int myc2f () //This is the celsius to farenheit conversion function.
 {
@@ -33,15 +33,14 @@ int myc2f () //This is the celsius to farenheit conversion function.
     ofstream fahrenheit("MURPHY_Fahrenheit.txt");
     
     cout <<"Celsius to Fahrenheit Process is Initiated" << endl;
-    clr_scrn();
     
     int i = 0, degrees;
     
         while (celsius >> degrees)
-        {
+            {
             i++;
-            fahrenheit <<roundf(((degrees+32)*(9.0/5.0))*1)/1 << endl; // It is necessary to round the results to maintain the same level of precision as the input data.
-        }
+            fahrenheit <<roundf((degrees*(9.0/5.0)+32)*1)/1 << endl; // It is necessary to round the results to maintain the same level of precision as the input data.
+            }
     
     celsius.close();
     fahrenheit.close();
@@ -61,15 +60,14 @@ int myf2c () //This is the farenheit to celsius conversion function.
     ofstream celsius("MURPHY_Celsius.txt");
     
     cout << "Fahrenheit to Celsius Process is Initiated" << endl;
-    clr_scrn();
     
     int i = 0, degrees;
     
             while (fahrenheit >> degrees)
-            {
+                {
                 i++;
                 celsius << roundf(((degrees-32)*(5.0/9.0))*1)/1 << endl; // It is necessary to round the results to maintain the same level of precision as the input data.
-            }
+                }
     
         fahrenheit.close();
         celsius.close();
@@ -98,24 +96,40 @@ void mymenu () //This is the main menu which greets the user.
 int main () // Our main program just consists of a simple do-while loop utilizing the functions we created.
 {
     int sel;
-
-        mymenu ();
+    mymenu ();
+    
     do
     {
         cout << "Please make a selection from the menu above: ";
         cin >> sel;
         
         if (sel == 1)
+            {
+            clr_scrn();
             myc2f ();
+            }
         
         else if (sel == 2)
+            {
+            clr_scrn();
             myf2c ();
+            }
         
         else if (sel == 3)
-            cout << "------------------------\nEnd of Assignment #6\n------------------------" << endl;
+            {
+            cout << endl;
+            cout << "------------------------" << endl;
+            cout << "End of Assignment #6" << endl;
+            cout << "------------------------" << endl;
+            cout << endl;
+            }
         
         else if (sel != 3)
+            {
+            cout << endl;
             cout << "Error! Choose only from the available menu options." << endl;
+            cout << endl;
+            }
     } while (sel != 3);
     
 return 0;
